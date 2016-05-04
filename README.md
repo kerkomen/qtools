@@ -33,7 +33,7 @@ The command above is equivalent to running `watch -n1 -d "qstat -u $USER"`.
 
 Flags:
 
-  - `-n`, `--nodes` to show information on nodes too (`qstat -n -u $USER`)
+  - `-n`, `--nodes` to show information on nodes too (`qstat -n1 -u $USER`)
 
 ### qclean
 
