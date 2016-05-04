@@ -16,4 +16,4 @@ flags = []
 flags << '-n' if options[:nodes]
 flags_str = flags.join(' ')
  
-system("watch -n1 -d \"qstat #{flags_str} -u $USER\" | grep -v 'Insecure world'")
+system("watch -n1 -d \"qstat #{flags_str} -u $USER\"")
