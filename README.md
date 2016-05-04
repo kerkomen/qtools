@@ -41,7 +41,7 @@ Usage:
 
     $ qclean
 
-The command above will run `rm *.[eo][0-9]*` in the current directory (if such files exist).
+The command above will run `rm *.[eo][0-9]* 2> /dev/null` in the current directory (if such files exist).
 
 ### qclean
 
