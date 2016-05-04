@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'qtools'
+
+system("watch -n1 -d \"qstat -u $USER\"")

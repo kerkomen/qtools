@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'qtools'
+
+files = `ls *.[eo][0-9]* 2> /dev/null`
+
+unless files.empty?
+  puts "-- The following files will be removed:"
+  puts files
+  puts "-- Continue? [y/n]"
+
+  answer = gets.strip.downcase
+  if answer == 'y' or answer == 'yes'
+    system("rm *.[eo][0-9]*")
+    puts "-- Ok, master. The files are removed!"
+  else
+    puts "-- Ok, master. No means no."
+  end
+else
+  puts "-- It's pretty clean in this folder... No files to be removed."
+end

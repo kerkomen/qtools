@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+require 'qtools'
+require 'optparse'
+
+Options = Struct.new(:name, :mem)
+
+args = Options.new(:name, :mem)
+OptionParser.new do |opts|
+  opts.banner = "Usage: qtools [options] python3 my_script.py ..."
+
+  opts.on("-n", "--name NAME", "Name for the job") do |n|
+    args.name = n
+  end
+  opts.on("-m", "--memory MEMORY", "Memory for the job (e.g., 80gb)") do |m|
+    args.mem = m
+  end
+end.parse!
+
+command = ARGV
+
+header_sge = <<-HEADER
+#!/bin/bash
+
+#$ -V
+#$ -cwd
+HEADER
+
+header_shell = "#!/bin/bash\n"
+
+header_pbs_tree = {}
+header_pbs_tree[:l] = ['walltime=24:00:00']
+header_pbs_tree[:d] = ['.']
+
+unless args.name.is_a? Symbol
+  header_pbs_tree[:N] = [args.name]
+end
+
+unless args.mem.is_a? Symbol
+  header_pbs_tree[:l] << "mem=#{args.mem}"
+end
+
+header_pbs = header_pbs_tree.map { |k, v| "#PBS -#{k} #{v.join(',')}" }.join("\n")
+
+sh_name = command[0].split[1].match(/(.*)\.(.*?)/)[1] + '.sh'
+
+File.write(sh_name, [header_shell, header_pbs, "", command[0]].join("\n"))
+
+puts "-- Submit #{sh_name} for execution? [y/n]"
+answer = STDIN.gets.strip.downcase
+if answer == 'y' or answer == 'yes'
+  system("qsub #{sh_name}")
+  puts "-- Ok, master, #{sh_name} is submitted."
+else
+  puts "-- Ok, master. No means no."
+end
