@@ -2,7 +2,7 @@
 
 require 'qtools'
 
-files = `ls *.[eo][0-9]* 2> /dev/null`)
+files = `ls *.[eo][0-9]* 2> /dev/null`
 
 unless files.empty?
   puts "-- The following files will be removed:"
