@@ -29,7 +29,7 @@ Usage:
 
     $ qwatch
 
-The command above is equivalent to running `watch -n1 -d "qstat -u $USER" 2> /dev/null`.
+The command above is equivalent to running `watch -n1 -d "qstat -u $USER"`.
 
 Flags:
 
@@ -41,7 +41,7 @@ Usage:
 
     $ qclean
 
-The command above will run `rm *.[eo][0-9]* 2> /dev/null` in the current directory (if such files exist).
+The command above will run `rm *.[eo][0-9]*` in the current directory (if such files exist).
 
 ### qclean
 
