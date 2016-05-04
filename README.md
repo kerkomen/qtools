@@ -21,7 +21,7 @@ Usage:
 
     $ qqsub 'python3 my_script.py -i input.txt -v' -n my_name -m 8gb
 
-The command above will create a shell script file with the corresponding command and submit a job which will feature the name `my_name` and require `8gb` of memory.
+The command above will create a shell script file with the corresponding content and submit a job which will feature the name `my_name` and require `8gb` of memory.
 
 ### qwatch
 
@@ -30,6 +30,10 @@ Usage:
     $ qwatch
 
 The command above is equivalent to running `watch -n1 -d "qstat -u $USER"`.
+
+Flags:
+
+  - `-n`, `--nodes` to show information on nodes too (`watch -n1 -d "qstat -n -u $USER"`)
 
 ### qclean
 

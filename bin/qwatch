@@ -1,5 +1,19 @@
 #!/usr/bin/env ruby
 
 require 'qtools'
+require 'optparse'
 
-system("watch -n1 -d \"qstat -u $USER\"")
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: qwatch [options]"
+
+  opts.on("-n", "--nodes", "Show nodes") do |n|
+    options[:nodes] = n
+  end
+end.parse!
+
+flags = []
+flags << '-n' if options[:nodes]
+flags_str = flags.join(' ')
+ 
+system("watch -n1 -d \"qstat #{flags_str} -u $USER\"")

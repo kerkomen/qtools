@@ -7,7 +7,7 @@ Options = Struct.new(:name, :mem)
 
 args = Options.new(:name, :mem)
 OptionParser.new do |opts|
-  opts.banner = "Usage: qtools [options] python3 my_script.py ..."
+  opts.banner = "Usage: qtools 'python3 my_script.py ...' [options]"
 
   opts.on("-n", "--name NAME", "Name for the job") do |n|
     args.name = n
