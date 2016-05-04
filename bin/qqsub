@@ -19,6 +19,10 @@ end.parse!
 
 command = ARGV
 
+if command.empty?
+  fail "Usage: qtools 'python3 my_script.py ...' [options]"
+end
+
 header_sge = <<-HEADER
 #!/bin/bash
 
