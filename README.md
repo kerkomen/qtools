@@ -29,11 +29,11 @@ Usage:
 
     $ qwatch
 
-The command above is equivalent to running `watch -n1 -d "qstat -u $USER"`.
+The command above is equivalent to running `watch -n1 -d "qstat -u $USER" 2> /dev/null`.
 
 Flags:
 
-  - `-n`, `--nodes` to show information on nodes too (`watch -n1 -d "qstat -n -u $USER"`)
+  - `-n`, `--nodes` to show information on nodes too (`qstat -n -u $USER`)
 
 ### qclean
 
