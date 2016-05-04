@@ -1,19 +1,19 @@
 # qtools
 
-`qtools` offers the shortcuts for some common procedures when working with for the Open Grid Scheduler.
+`qtools` offers the shortcuts for some common procedures when working with the Open Grid Scheduler.
 
 
 ## Installation
 
-Install it using `gem`:
+Install `qtools` using `gem`:
 
     $ gem install qtools
 
 ## Usage
 
-- `qqsub`  to submit a script or a compiled executablea
+- `qqsub`  to submit a script or a compiled executable
 - `qwatch` to see the running tasks for the current user
-- `qclean` to remove .e* and .o* run files in the current directory
+- `qclean` to remove `.e[0-9]*` and `.o[0-9]*` files in the current directory
 
 ## Contributing
 
