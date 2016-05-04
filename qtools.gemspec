@@ -23,9 +23,9 @@ Gem::Specification.new do |spec|
   end
 
   # spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.files         = %w{ .gitignore .travis.yml Gemfile LICENSE.txt README.md Rakefile bin/console bin/qclean bin/qqsub bin/qwatch bin/setup lib/qtools.rb lib/qtools/version.rb qtools.gemspec}
+  spec.files         = %w{ .gitignore .travis.yml Gemfile LICENSE.txt README.md Rakefile bin/console bin/qclean bin/qqsub bin/qwatch bin/qcount bin/setup lib/qtools.rb lib/qtools/version.rb qtools.gemspec}
   spec.bindir        = "bin"
-  spec.executables   = ["qwatch", "qclean", "qqsub"]
+  spec.executables   = ["qwatch", "qclean", "qqsub", "qcount"]
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.10"
