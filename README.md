@@ -12,7 +12,7 @@ Install `qtools` using `gem`:
 ## Usage
 
 - `qqsub`  to submit a script or a compiled executable
-- `qwatch` to see the running tasks for the current user
+- `qwatch` to see the running jobs for the current user
 - `qclean` to remove `.e[0-9]*` and `.o[0-9]*` files in the current directory
 
 ### qqsub
@@ -49,7 +49,7 @@ Usage:
 
     $ qcount
 
-Count the number of tasks for the `$USER`.
+Count the number of jobs for the `$USER`. Running `qcount -a` will output the number of jobs for all the users.
 
 ## Contributing
 
