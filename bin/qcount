@@ -16,4 +16,4 @@ flags = []
 flags << '-u $USER' unless options[:all]
 flags_str = flags.join(' ')
  
-`qstat #{flags_str} | grep -c ^[0-9]`
+puts `qstat #{flags_str} | grep -c ^[0-9]`
