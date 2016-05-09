@@ -1,5 +1,9 @@
 # Version history
 
+**0.4.0**:
+
+- New command: `qless`.
+
 **0.3.1**:
 
 - Improved naming scheme for the shell script when using `qqsub`.

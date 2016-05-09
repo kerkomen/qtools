@@ -17,6 +17,7 @@ Install `qtools` using `gem`:
 - `qcount` to see the number of running jobs for the current user
 - `qnode` to list the free nodes
 - `qundo` to stop the last submitted job for the current user
+- `qless` to read the last error log `.e[0-9]*` in the current folder
 
 ### qqsub
 
@@ -69,6 +70,14 @@ Usage:
     $ qundo
 
 The command above will try to run `qdel` for the last job submitted.
+
+### qless
+
+Usage:
+
+    $ qless
+
+The command above will try to read the last default error log `.e[0-9]*` in the current folder. Use `-o` flag to read the last default output file.
 
 ## Contributing
 

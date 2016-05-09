@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require 'qtools'
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: qless [options]"
+
+  opts.on("-o", "--out", "Read the last output") do |o|
+    options[:out] = o
+  end
+
+  # default
+  opts.on("-e", "--err", "Read the last error log") do |e|
+    options[:err] = e  
+  end
+
+end.parse!
+
+o_file = `ls -ltr *.o[0-9]* | tail -n1 2> /dev/null`
+e_file = `ls -ltr *.e[0-9]* | tail -n1 2> /dev/null`
+
+if options[:out]
+  unless o_file.empty?
+    `less #{o_file}`
+  else
+    puts "-- No default output files in this foder." 
+  end
+else
+  unless e_file.empty?
+    `less #{e_file}`
+  else
+    puts "-- No default error files in this foder." 
+  end
+end
