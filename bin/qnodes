@@ -10,11 +10,22 @@ OptionParser.new do |opts|
   opts.on("-m", "--memory", "Sort free nodes by available memory") do |m|
     options[:memory] = m
   end
+  opts.on("-c", "--cores", "Sort free nodes by free cores") do |c|
+    options[:cores] = c
+  end
 end.parse!
 
 flags = []
-flags << (options[:memory] ? '-k5nr' : '-k3n')
+flags << (options[:memory] ? '-k5nr' : '-k3n')  # :cores is a special case
 flags_str = flags.join(' ')
 
-puts `qhost | head -n2`
-puts `qhost | grep free | sort #{flags_str}`
+unless options[:cores]
+  puts `qhost | head -n2`
+  puts `qhost | grep free | sort #{flags_str}`
+else
+  header = `qhost | head -n1`
+  new_header = header.strip.gsub("CORES_TOTAL(USED)", "CORES_TOTAL\tCORES_USED") + "\tCORES_FREE"
+  puts new_header
+  puts `qhost | head -n2 | tail -n1`
+  puts `qhost | egrep 'free' | sort -k5nr | tr "(" "\t" | tr -d ")" | awk 'BEGIN {OFS="\t"}; {print $0, $2-$3}'`
+end

@@ -12,9 +12,10 @@ Install `qtools` using `gem`:
 ## Usage
 
 - `qqsub`  to submit a script or a compiled executable
+- `qclean` to remove `.e[0-9]*` and `.o[0-9]*` files in the current directory
 - `qwatch` to see the running jobs for the current user
 - `qcount` to see the number of running jobs for the current user
-- `qclean` to remove `.e[0-9]*` and `.o[0-9]*` files in the current directory
+- `qnodes` to see the free nodes
 
 ### qqsub
 
@@ -51,6 +52,14 @@ Usage:
     $ qcount
 
 Count the number of jobs for the `$USER`. Running `qcount -a` will output the number of jobs for all the users.
+
+### qnodes
+
+Usage:
+
+    $ qnodes
+
+The command above will print the list of free nodes sorted by their `LOAD`. Use `qnodes -m` to sort the list of free nodes by memory available.
 
 ## Contributing
 
