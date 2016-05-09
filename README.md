@@ -13,6 +13,7 @@ Install `qtools` using `gem`:
 
 - `qqsub`  to submit a script or a compiled executable
 - `qwatch` to see the running jobs for the current user
+- `qcount` to see the number of running jobs for the current user
 - `qclean` to remove `.e[0-9]*` and `.o[0-9]*` files in the current directory
 
 ### qqsub
