@@ -23,15 +23,13 @@ e_file = `ls -tr *.e[0-9]* | tail -n1 2> /dev/null`
 
 if options[:out]
   unless o_file.empty?
-    puts o_file
-    `less #{o_file.strip}`
+    system("less #{o_file.strip}")
   else
     puts "-- No default output files in this foder." 
   end
 else
   unless e_file.empty?
-    puts e_file
-    `less #{e_file.strip}`
+    system("less #{e_file.strip}")
   else
     puts "-- No default error files in this foder." 
   end
