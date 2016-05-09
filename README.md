@@ -29,55 +29,27 @@ The command above will create a shell script file with the corresponding content
 
 ### qwatch
 
-Usage:
-
-    $ qwatch
-
-The command above is equivalent to running `watch -n1 -d "qstat -u $USER"`.
-
-Flags:
-
-  - `-n`, `--nodes` to show information on nodes too (`qstat -n1 -u $USER`)
+`qwatch` is equivalent to running `watch -n1 -d "qstat -u $USER"`. Use `-n` (`--nodes`) flag to show information on nodes too (`qstat -n1 -u $USER`)
 
 ### qclean
 
-Usage:
-
-    $ qclean
-
-The command above will run `rm *.[eo][0-9]*` in the current directory (if such files exist).
+`qclean` will run `rm *.[eo][0-9]*` in the current directory (if such files exist).
 
 ### qcount
 
-Usage:
-
-    $ qcount
-
-Count the number of jobs for the `$USER`. Running `qcount -a` will output the number of jobs for all the users.
+Use `qcount` to count the number of jobs for the `$USER`. Running `qcount -a` will output the number of jobs for all the users.
 
 ### qnode
 
-Usage:
-
-    $ qnode
-
-The command above will print the list of free nodes sorted by their `LOAD`. Use `qnode -m` to sort the list of free nodes by memory available and `qnode -c` to sort the list by the number of free cores.
+Run `qnode` to print the list of free nodes sorted by their `LOAD`. Use `qnode -m` to sort the list of free nodes by memory available and `qnode -c` to sort the list by the number of free cores.
 
 ### qundo
 
-Usage:
-
-    $ qundo
-
-The command above will try to run `qdel` for the last job submitted.
+`qundo` will try to run `qdel` for the last job submitted (for the current user).
 
 ### qless
 
-Usage:
-
-    $ qless
-
-The command above will try to read the last default error log `.e[0-9]*` in the current folder. Use `-o` flag to read the last default output file.
+Run `qless` to read the last default error log `.e[0-9]*` in the current folder. Use `-o` flag to read the last default output file.
 
 ## Contributing
 
