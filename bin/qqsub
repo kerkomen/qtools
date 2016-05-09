@@ -46,7 +46,9 @@ end
 
 header_pbs = header_pbs_tree.map { |k, v| "#PBS -#{k} #{v.join(',')}" }.join("\n")
 
-sh_name = command[0].split[1].match(/(.*)\.(.*?)/)[1] + '.sh'
+sh_prefix_guess = (command[0].split[1].include?('.') or command[0].split.length == 1) ? command[0].split[1] : command[0].split[0]  # guess if script or executable
+sh_prefix = sh_prefix_guess.include?('.') ? sh_prefix_guess.match(/(.*)\.(.*?)/)[1] : sh_prefix_guess
+sh_name = (header_pdb_tree[:N] ? header_pdb_tree[:N] : sh_prefix) + '.sh'
 
 File.write(sh_name, [header_shell, header_pbs, "", command[0]].join("\n"))
 
