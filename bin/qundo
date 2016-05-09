@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'qtools'
+
+last_job = `qstat -u $USER | tail -n 1`
+last_job_id = `qstat -u $USER | tail -n 1 | sed -rn 's/(^[0-9]*).*/\1/p'`
+
+unless last_job.empty?
+  puts "-- The following job will be stopped:"
+  puts last_job
+  puts "-- Continue? [y/n]"
+
+  answer = gets.strip.downcase
+  if answer == 'y' or answer == 'yes'
+    `qdel #{last_job_id}`
+    puts "-- Ok, master. The job #{last_job_id} was stopped."
+  else
+    puts "-- Ok, master. No means no."
+  end
+else
+  puts "-- No jobs of yours are currently running."
+end

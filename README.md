@@ -15,7 +15,8 @@ Install `qtools` using `gem`:
 - `qclean` to remove `.e[0-9]*` and `.o[0-9]*` files in the current directory
 - `qwatch` to see the running jobs for the current user
 - `qcount` to see the number of running jobs for the current user
-- `qnode` to see the free nodes
+- `qnode` to list the free nodes
+- `qundo` to stop the last submitted job for the current user
 
 ### qqsub
 
@@ -60,6 +61,14 @@ Usage:
     $ qnode
 
 The command above will print the list of free nodes sorted by their `LOAD`. Use `qnode -m` to sort the list of free nodes by memory available and `qnode -c` to sort the list by the number of free cores.
+
+### qundo
+
+Usage:
+
+    $ qundo
+
+The command above will try to run `qdel` for the last job submitted.
 
 ## Contributing
 
