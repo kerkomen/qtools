@@ -3,7 +3,7 @@
 
 **0.2.0**:
 
-- New command: `qnodes`.
+- New command: `qnode`.
 
 
 **0.1.0**:
