@@ -18,8 +18,8 @@ OptionParser.new do |opts|
 
 end.parse!
 
-o_file = `ls -tr *.o[0-9]* | tail -n1 2> /dev/null`
-e_file = `ls -tr *.e[0-9]* | tail -n1 2> /dev/null`
+o_file = `ls -tr *.o[0-9]* 2> /dev/null | tail -n1`
+e_file = `ls -tr *.e[0-9]* 2> /dev/null | tail -n1`
 
 if options[:out]
   unless o_file.empty?
