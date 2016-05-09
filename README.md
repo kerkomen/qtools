@@ -59,7 +59,7 @@ Usage:
 
     $ qnode
 
-The command above will print the list of free nodes sorted by their `LOAD`. Use `qnode -m` to sort the list of free nodes by memory available.
+The command above will print the list of free nodes sorted by their `LOAD`. Use `qnode -m` to sort the list of free nodes by memory available and `qnode -c` to sort the list by the number of free cores.
 
 ## Contributing
 
