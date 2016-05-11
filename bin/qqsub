@@ -41,8 +41,7 @@ HEADER
 
 header_shell = "#!/bin/bash\n"
 
-header_pbs_tree = {}
-header_pbs_tree[:l] = []
+header_pbs_tree = Hash.new([])
 header_pbs_tree[:l] << "walltime=#{args.time ? args.time : '24'}:00:00"
 header_pbs_tree[:d] = ['.']
 
