@@ -62,8 +62,6 @@ if args.cpus
   header_pbs_tree[:l] << "ncpus=#{args.cpus}"
 end
 
-puts header_pbs_tree
-
 header_pbs = header_pbs_tree.map { |k, v| "#PBS -#{k} #{v.join(',')}" }.join("\n")
 
 sh_prefix_guess = (command[0].split[1].include?('.') or command[0].split.length == 1) ? command[0].split[1] : command[0].split[0]  # guess if script or executable
