@@ -41,7 +41,8 @@ HEADER
 
 header_shell = "#!/bin/bash\n"
 
-header_pbs_tree = Hash.new([])
+header_pbs_tree = Hash.new
+header_pbs_tree[:l] = []
 header_pbs_tree[:l] << "walltime=#{args.time ? args.time : '24'}:00:00"
 header_pbs_tree[:d] = ['.']
 
@@ -54,12 +55,14 @@ if args.mem
 end
 
 if args.queue
-  header_pbs_tree[:q] << [args.queue]
+  header_pbs_tree[:q] = [args.queue]
 end
 
 if args.cpus
   header_pbs_tree[:l] << "ncpus=#{args.cpus}"
 end
+
+puts header_pbs_tree
 
 header_pbs = header_pbs_tree.map { |k, v| "#PBS -#{k} #{v.join(',')}" }.join("\n")
 
