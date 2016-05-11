@@ -5,6 +5,7 @@ require 'optparse'
 
 Options = Struct.new(:name, :mem, :queue, :cpus, :time)
 
+args = Options.new
 OptionParser.new do |opts|
   opts.banner = "Usage: qtools 'python3 my_script.py ...' [options]"
 
