@@ -3,9 +3,8 @@
 require 'qtools'
 require 'optparse'
 
-Options = Struct.new(:name, :mem)
+Options = Struct.new(:name, :mem, :queue, :cpus, :time)
 
-args = Options.new(:name, :mem)
 OptionParser.new do |opts|
   opts.banner = "Usage: qtools 'python3 my_script.py ...' [options]"
 
@@ -14,6 +13,15 @@ OptionParser.new do |opts|
   end
   opts.on("-m", "--memory MEMORY", "Memory for the job (e.g., 80gb)") do |m|
     args.mem = m
+  end
+  opts.on("-q", "--queue QUEUE_TITLE", "Select a queue for the job") do |q|
+    args.queue = q
+  end
+  opts.on("-c", "--cpu NUMBER_OF_CORES", "Number of CPIs for the job (e.g., 8)") do |c|
+    args.cpus = c
+  end
+  opts.on("-t", "--time TIME_IN_HOURS", "Set the time limit for the job (default is 24 hours)") do |t|
+    args.time = t
   end
 end.parse!
 
@@ -33,15 +41,24 @@ HEADER
 header_shell = "#!/bin/bash\n"
 
 header_pbs_tree = {}
-header_pbs_tree[:l] = ['walltime=24:00:00']
+header_pbs_tree[:l] = []
+header_pbs_tree[:l] << "walltime=#{args.time ? args.time : '24'}:00:00"
 header_pbs_tree[:d] = ['.']
 
-unless args.name.is_a? Symbol
+if args.name
   header_pbs_tree[:N] = [args.name]
 end
 
-unless args.mem.is_a? Symbol
+if args.mem
   header_pbs_tree[:l] << "mem=#{args.mem}"
+end
+
+if args.queue
+  header_pbs_tree[:q] << [args.queue]
+end
+
+if args.cpus
+  header_pbs_tree[:l] << "ncpus=#{args.cpus}"
 end
 
 header_pbs = header_pbs_tree.map { |k, v| "#PBS -#{k} #{v.join(',')}" }.join("\n")

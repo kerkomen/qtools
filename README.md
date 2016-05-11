@@ -27,6 +27,14 @@ Usage:
 
 The command above will create a shell script file with the corresponding content and submit a job which will feature the name `my_name` and require `8gb` of memory.
 
+Available parameters:
+
+- `-n`, `--name`   - job title
+- `-m`, `--memory` - memory (e.g., `80gb`)
+- `-q`, `--queue`  - queue title
+- `-t`, `--time`   - job time limit in hours (default is `24`)
+- `-c`, `--cpu`    - number of CPUs
+
 ### qwatch
 
 `qwatch` is equivalent to running `watch -n1 -d "qstat -u $USER"`. Use `-n` (`--nodes`) flag to show information on nodes too (`qstat -n1 -u $USER`)
