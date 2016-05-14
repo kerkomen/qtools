@@ -1,5 +1,7 @@
 # qtools
 
+[![Gem Version](https://badge.fury.io/rb/qtools.svg)](https://badge.fury.io/rb/qtools)
+
 `qtools` offers the shortcuts for some common procedures when working with the Open Grid Scheduler.
 
 
