@@ -27,5 +27,5 @@ else
   new_header = header.strip.gsub("CORES_TOTAL(USED)", "CORES_TOTAL\tCORES_USED") + "\tCORES_FREE"
   puts new_header
   puts `qhost | head -n2 | tail -n1`
-  puts `qhost | egrep 'free' | sort -k5nr | tr "(" "\t" | tr -d ")" | awk 'BEGIN {OFS="\t"}; {print $0, $2-$3}'`
+  puts `qhost | egrep 'free' | tr "(" "\t" | tr -d ")" | awk 'BEGIN {OFS="\t"}; {print $0, $2-$3}' | sort -k8nr`
 end
