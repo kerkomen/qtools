@@ -36,7 +36,7 @@ end
 # Guess the scheduler (SGE or PBS)
 scheduler_temp = `pbs-config 2> /dev/null`
 SCHEDULER = (scheduler_temp.empty? or scheduler_temp.nil?) ? :sge : :pbs
-puts "the scheduler is guessed to be #{SCHEDULER}"
+# puts "the scheduler is guessed to be #{SCHEDULER}"
 
 header_shell = "#!/bin/bash\n"
 
