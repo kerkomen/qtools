@@ -78,6 +78,7 @@ if args.cpus
     header_tree[:pe] = "smp #{args.cpus}"
   else
     header_tree[:l] << "ncpus=#{args.cpus}"
+  end
 end
 
 scheduler_prefix = SCHEDULER == :sge ? "$" : "PBS"
@@ -87,7 +88,7 @@ sh_prefix_guess = (command[0].split[1].include?('.') or command[0].split.length 
 sh_prefix = sh_prefix_guess.include?('.') ? sh_prefix_guess.match(/(.*)\.(.*?)/)[1] : sh_prefix_guess
 sh_name = (header_tree[:N] ? header_tree[:N][0] : sh_prefix) + '.sh'
 
-File.write(sh_name, [header_shell, header_pbs, "", command[0]].join("\n"))
+File.write(sh_name, [header_shell, header, "", command[0]].join("\n"))
 
 puts "-- Submit #{sh_name} for execution? [y/n]"
 answer = STDIN.gets.strip.downcase
