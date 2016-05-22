@@ -32,6 +32,11 @@ if command.empty?
   fail "Usage: qtools 'python3 my_script.py ...' [options]"
 end
 
+
+# Guess the scheduler (SGE or PBS)
+scheduler_temp = `pbs-config 2> /dev/null`
+SCHEDULER = scheduler.empty? or scheduler.nil? ? :sge : :pbs
+
 header_sge = <<-HEADER
 #!/bin/bash
 
@@ -41,32 +46,46 @@ HEADER
 
 header_shell = "#!/bin/bash\n"
 
-header_pbs_tree = Hash.new
-header_pbs_tree[:l] = []
-header_pbs_tree[:l] << "walltime=#{args.time ? args.time : '24'}:00:00"
-header_pbs_tree[:d] = ['.']
+if SCHEDULER == :sge
+  header_tree = Hash.new
+  header_tree[:V] = []
+  header_tree[:cwd] = []
+  header_tree[:l] = []
+  header_tree[:l] << "h_rt=#{args.time ? args.time : '24'}:00:00"
+  header_tree[:d] = ['.']
+else
+  header_tree = Hash.new
+  header_tree[:l] = []
+  header_tree[:l] << "walltime=#{args.time ? args.time : '24'}:00:00"
+  header_tree[:d] = ['.']
+end
+
 
 if args.name
-  header_pbs_tree[:N] = [args.name]
+  header_tree[:N] = [args.name]
 end
 
 if args.mem
-  header_pbs_tree[:l] << "mem=#{args.mem}"
+  header_tree[:l] << "#{SCHEDULER == :sge ? "h_vmem" : "mem"}=#{args.mem}"
 end
 
 if args.queue
-  header_pbs_tree[:q] = [args.queue]
+  header_tree[:q] = [args.queue]
 end
 
 if args.cpus
-  header_pbs_tree[:l] << "ncpus=#{args.cpus}"
+  if SCHEDULER == :sge
+    header_tree[:pe] = "smp #{args.cpus}"
+  else
+    header_tree[:l] << "ncpus=#{args.cpus}"
 end
 
-header_pbs = header_pbs_tree.map { |k, v| "#PBS -#{k} #{v.join(',')}" }.join("\n")
+scheduler_prefix = SCHEDULER == :sge ? "$" : "PBS"
+header = header_tree.map { |k, v| "##{scheduler_prefix} -#{k} #{v.join(',')}" }.join("\n")
 
 sh_prefix_guess = (command[0].split[1].include?('.') or command[0].split.length == 1) ? command[0].split[1] : command[0].split[0]  # guess if script or executable
 sh_prefix = sh_prefix_guess.include?('.') ? sh_prefix_guess.match(/(.*)\.(.*?)/)[1] : sh_prefix_guess
-sh_name = (header_pbs_tree[:N] ? header_pbs_tree[:N][0] : sh_prefix) + '.sh'
+sh_name = (header_tree[:N] ? header_tree[:N][0] : sh_prefix) + '.sh'
 
 File.write(sh_name, [header_shell, header_pbs, "", command[0]].join("\n"))
 
