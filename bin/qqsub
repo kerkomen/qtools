@@ -35,7 +35,7 @@ end
 
 # Guess the scheduler (SGE or PBS)
 scheduler_temp = `pbs-config 2> /dev/null`
-SCHEDULER = scheduler.empty? or scheduler.nil? ? :sge : :pbs
+SCHEDULER = scheduler_temp.empty? or scheduler_temp.nil? ? :sge : :pbs
 
 header_sge = <<-HEADER
 #!/bin/bash
