@@ -46,7 +46,6 @@ if SCHEDULER == :sge
   header_tree[:cwd] = []
   header_tree[:l] = []
   header_tree[:l] << "h_rt=#{args.time ? args.time : '24'}:00:00"
-  header_tree[:d] = ['.']
 else
   header_tree = Hash.new
   header_tree[:l] = []
