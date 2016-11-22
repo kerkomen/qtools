@@ -1,5 +1,9 @@
 # Version history
 
+**0.4.2.**:
+
+- Fixes for `qqsub`, `qdel`.
+
 **0.4.0**:
 
 - New command: `qless`.
