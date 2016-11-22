@@ -68,7 +68,8 @@ end
 
 if args.cpus
   if SCHEDULER == :sge
-    header_tree[:pe] = "smp #{args.cpus}"
+    header_tree[:pe] = []
+    header_tree[:pe] << "smp #{args.cpus}"
   else
     header_tree[:l] << "ncpus=#{args.cpus}"
   end
