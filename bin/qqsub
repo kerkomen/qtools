@@ -12,7 +12,7 @@ OptionParser.new do |opts|
   opts.on("-n", "--name NAME", "Name for the job") do |n|
     args.name = n
   end
-  opts.on("-m", "--memory MEMORY", "Memory for the job (e.g., 80gb)") do |m|
+  opts.on("-m", "--memory MEMORY", "Memory for the job (e.g., 80G)") do |m|
     args.mem = m
   end
   opts.on("-q", "--queue QUEUE_TITLE", "Select a queue for the job") do |q|
